@@ -1,0 +1,78 @@
+* {
+  font-family: Lato;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.game-board-row {
+  display: flex;
+  gap: 1em;
+}
+
+.game-board-cell {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.play-card {
+  background-color: transparent;
+  position: relative;
+  width: 55px;
+  height: 85px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid black;
+  border-radius: 0.4em;
+}
+
+.game-board-cell-flipped .play-card {
+  transform: rotateY(180deg);
+}
+
+.play-card-front,
+.play-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.play-card-front {
+  background-color: lightsalmon;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4em;
+}
+
+.play-card-front img {
+  width: 45px;
+  height: 45px;
+}
+
+.play-card-back {
+  transform: rotateY(180deg);
+  border-radius: 0.4em;
+}
