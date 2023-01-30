@@ -24,6 +24,24 @@ const Board = () => {
 
   const onCardClick = (evt, rowIdx, cellIdx) => {
     if (selections.length === 2) {
+      console.log('Dentro IF ::: ', selections);
+      if (selections[0].symbol.id !== selections[1].symbol.id) {
+        console.log('Dentro IF due cards selected ::: ', selections);
+        setBoard((prevBoard) => {
+          prevBoard[selections[0].row][selections[0].column].selected = false;
+          prevBoard[selections[1].row][selections[1].column].selected = false;
+          setSelections([]);
+          console.log('Dentro setBoard ::: ', selections);
+          return [...prevBoard];
+        });
+      } else {
+        console.log('Dentro ELSE due cards selected ::: ', selections);
+        setMatches((prevMatches) => {
+          setSelections([]);
+          console.log('Dentro ELSE due cards selected ::: ', selections);
+          return prevMatches + 1;
+        });
+      }
       return;
     }
 
@@ -33,24 +51,17 @@ const Board = () => {
       setSelections([...selections, card]);
       return [...prevBoard];
     });
-
-    if (selections.length < 2) {
-      if (selections[0].symbol.id !== selections[1].symbol.id) {
-        setBoard((prevBoard) => {
-          prevBoard[selections[0].row][selections[0].column].selected = false;
-          prevBoard[selections[1].row][selections[1].column].selected = false;
-          setSelections([...selections, []]);
-          return [...prevBoard];
-        })
-      } else {
-        setMatches((prevMatches) => {return prevMatches + 1})
-      }
-    }
   };
 
   useEffect(
-    () => {}, //primo parametro, funzione che viene eseguita quando uno degli elementi indicato nel secondo parametro cambia
-    [] // secondo parametro, elenco di variabili di stato da osservare (in questo frangente a noi interessa unicamente selections)
+    () => {
+      console.log('Dentro useEffect ::: ', matches);
+      setBoard((prevBoard) => {
+        console.log('Dentro setBoard ::: ', prevBoard);
+        return [...prevBoard];
+      });
+    }, //primo parametro, funzione che viene eseguita quando uno degli elementi indicato nel secondo parametro cambia
+    [matches] // secondo parametro, elenco di variabili di stato da osservare (in questo frangente a noi interessa unicamente selections)
   );
 
   return (
